@@ -19,7 +19,7 @@ spec:
             command: ["sh", "-c", "kubectl get pods --all-namespaces --field-selector 'status.phase==Failed' -o json | kubectl delete -f -"]
             name: {{ .Values.cronjob.name }}
           restartPolicy: OnFailure
-  schedule: {{ .Values.cronjob.schedule }}
+  schedule: "{{ .Values.cronjob.schedule }}"
   startingDeadlineSeconds: {{ .Values.cronjob.startingdeadlineseconds }}
   failedJobsHistoryLimit: {{ .Values.cronjob.failedjobshistorylimit }}
   successfulJobsHistoryLimit: {{ .Values.cronjob.successfuljobshistorylimit }}
