@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.cronjob.name }}
+  namespace: {{ .Values.namespace.name }}
+spec:
+  jobTemplate:
+    metadata:
+      name: {{ .Values.cronjob.name }}
+    spec:
+      activeDeadlineSeconds: {{ .Values.cronjob.activedeadlineseconds }}
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          serviceAccountName: {{ .Values.serviceaccount.name }}
+          containers:
+          - image: {{ .Values.cronjob.image }}
+            command: ["sh", "-c", "kubectl get pods --all-namespaces --field-selector 'status.phase==Failed' -o json | kubectl delete -f -"]
+            name: {{ .Values.cronjob.name }}
+          restartPolicy: OnFailure
+  schedule: {{ .Values.cronjob.schedule }}
+  startingDeadlineSeconds: {{ .Values.cronjob.startingdeadlineseconds }}
+  failedJobsHistoryLimit: {{ .Values.cronjob.failedjobshistorylimit }}
+  successfulJobsHistoryLimit: {{ .Values.cronjob.successfuljobshistorylimit }}

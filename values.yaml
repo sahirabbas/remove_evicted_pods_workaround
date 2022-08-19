@@ -1,0 +1,16 @@
+namespace:
+  name: evicted-pods-cleanup
+serviceaccount:
+  name: podevict-sa
+clusterrole:
+  name: romove-evicted
+clusterrolebinding:
+  name: romove-evicted
+cronjob:
+  name: cleanup-evicted-pods
+  activedeadlineseconds: 1500
+  image: sahirabbask/kubectl
+  schedule: '*/30 * * * *'
+  startingdeadlineseconds: 180
+  failedjobshistorylimit: 1
+  successfuljobshistorylimit: 1
