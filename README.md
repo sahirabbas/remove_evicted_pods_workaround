@@ -42,7 +42,7 @@ cd remove_evicted_pods_workaround
 helm install <name>  .
 ```
 
-By default, the chart will create a namespace evicted-pods-cleanup and will deploy the cronjob on the namespace and the cronjob will run every 30 mins. 
+By default, the chart will create a namespace `evicted-pods-cleanup` and will deploy the cronjob on the namespace and the cronjob will run every 30 mins. 
 
 Follow the below table for overridable values. 
 
